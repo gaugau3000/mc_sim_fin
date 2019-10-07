@@ -19,7 +19,10 @@ def mc_sims(result_dates: Series, result_amounts: Series, start_equity: float,
                                                                                                                     sim_is_ruin,
                                                                                                                     start_equity)
 
-    return risk_of_ruin_percent, med_drawdown_percent, med_return_percent, prob_returns_positive
+    return {'risk_of_ruin_percent': risk_of_ruin_percent,
+            'med_drawdown_percent': med_drawdown_percent,
+            'med_return_percent': med_return_percent,
+            'prob_returns_positive': prob_returns_positive}
 
 
 def make_simulations(nb_sims: int, nb_trades_for_sample: int, result_amounts: Series, start_equity: float,

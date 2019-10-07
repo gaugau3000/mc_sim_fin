@@ -28,7 +28,7 @@ setup(
     # There are some restrictions on what makes a valid project name
     # specification here:
     # https://packaging.python.org/specifications/core-metadata/#name
-    name='montecarlo-simulation-finance',  # Required
+    name='mc-sim-fin',  # Required
 
     # Versions should comply with PEP 440:
     # https://www.python.org/dev/peps/pep-0440/
@@ -41,7 +41,7 @@ setup(
     # This is a one-line description or tagline of what your project does. This
     # corresponds to the "Summary" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#summary
-    description='Make montecarlo simulations on previous returns',  # Optional
+    description='montecarlo simulations library on backtest results analysis',  # Optional
 
     # This is an optional longer description of your project that represents
     # the body of text which users will see when they visit PyPI.
@@ -70,7 +70,7 @@ setup(
     # This field corresponds to the "Home-Page" metadata field:
     # https://packaging.python.org/specifications/core-metadata/#home-page-optional
     # Optional
-    url='https://github.com/gaugau3000/montecarlo-simulation-finance',
+    url='https://github.com/gaugau3000/montecarlo_simulation_finance',
 
     # This should be your name or the name of the organization which owns the
     # project.
@@ -88,7 +88,7 @@ setup(
         #   3 - Alpha
         #   4 - Beta
         #   5 - Production/Stable
-        'Development Status :: 1 - Planning',
+        'Development Status :: 3 - Alpha',
 
         # Indicate who your project is intended for
         'Intended Audience :: Financial and Insurance Industry',
@@ -108,7 +108,7 @@ setup(
     # project page. What does your project relate to?
     #
     # Note that this is a string of words separated by whitespace, not a list.
-    keywords='finance montecarlo simulations backtest',  # Optional
+    keywords='finance montecarlo simulations backtest risk management',  # Optional
 
     # You can just specify package directories manually here if your project is
     # simple. Or you can use find_packages().
@@ -119,7 +119,7 @@ setup(
     #
     #   py_modules=["my_module"],
     #
-    packages=['montecarlo-simulation-finance'],  # Required
+    packages=['montecarlo_simulation_finance'],  # Required
 
     # Specify which Python versions you support. In contrast to the
     # 'Programming Language' classifiers above, 'pip install' will check this

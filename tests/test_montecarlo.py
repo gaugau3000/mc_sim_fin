@@ -41,15 +41,15 @@ def test_my_capital_is_4000_i_consider_ruin_at_3500_dollar_the_simulation_loss_7
 
 
 def test_during_4_simulations_i_am_ruin_during_1_so_i_get_a_probability_of_25_pecent_to_get_ruin():
-    assert mc_utils.get_sims_ruin_probability_percent([False, False, True, False]) == 25
+    assert mc_utils.get_sims_ruin_probability_percent([False, False, True, False]) == 0.25
 
 
 def test_i_make_5_simulations_the_absolute_median_drawdown_is_200_and_my_capital_is_4000_the_median_drawdown_percent_should_be_5_percent():
-    assert mc_utils.get_sims_median_drawdown_percent([1000, 700, 200, 100, 50], 4000) == 5
+    assert mc_utils.get_sims_median_drawdown_percent([1000, 700, 200, 100, 50], 4000) == 0.05
 
 
 def test_i_make_3_simulations_median_return_is_200_my_start_capital_is_1000_so_i_win_20_percent():
-    assert mc_utils.get_sims_median_return_percent([100, 200, 300], 1000) == 20
+    assert mc_utils.get_sims_median_return_percent([100, 200, 300], 1000) == 0.20
 
 
 def test_i_make_simulation_and_the_result_is_1000_dollar_so_my_profit_is_positive():
@@ -57,7 +57,7 @@ def test_i_make_simulation_and_the_result_is_1000_dollar_so_my_profit_is_positiv
 
 
 def test_i_make_4_simulations_3_gives_me_positive_results_so_i_have_75_percent_probability_to_be_positive():
-    assert mc_utils.get_sims_return_positive_percent([True, False, True, True]) == 75
+    assert mc_utils.get_sims_return_positive_percent([True, False, True, True]) == 0.75
 
 
 def test_start_equity_5000_ruin_equity_4000_1_year_test():
@@ -66,7 +66,12 @@ def test_start_equity_5000_ruin_equity_4000_1_year_test():
 
     df = pd.DataFrame({'result_dates': result_dates, 'result_amounts': result_amounts})
 
-    risk_of_ruin_percent, med_drawdown_percent, med_return_percent, prob_returns_positive = mc_sims(df['result_dates'], df['result_amounts'], 5000, 4000, 1, 100000)
+    mc_sims_results = mc_sims(df['result_dates'], df['result_amounts'], 5000, 4000, 1, 10000)
 
+    assert 0.155 < mc_sims_results['risk_of_ruin_percent'] < 0.16
+    assert round(mc_sims_results['med_drawdown_percent'], 2) == 0.36
+    assert 1.80 < mc_sims_results['med_return_percent'] < 2.00
+    assert mc_sims_results['prob_returns_positive'] > 0.997
 
-    print("risk_of_ruin_percent : {}, med_drawdown_percent : {}, med_return_percent : {}, prob_returns_positive : {} ".format(risk_of_ruin_percent, med_drawdown_percent, med_return_percent, prob_returns_positive))
+    print(mc_sims_results)
+    # print("risk_of_ruin_percent : {}, med_drawdown_percent : {}, med_return_percent : {}, prob_returns_positive : {} ".format(mc_sims['risk_of_ruin_percent'], mc_sims['med_drawdown_percent'], mc_sims['med_return_percent'], mc_sims['prob_returns_positive']))
