@@ -1,0 +1,3 @@
+-r requirements.txt
+pytest==4.5
+pytest-flake8==1.0.4

@@ -1,0 +1,15 @@
+FROM python:3.7-slim-buster
+RUN apt-get update \
+    && pip install --upgrade pip
+
+RUN mkdir montecarlo_simulation_finance
+WORKDIR /montecarlo_simulation_finance
+
+COPY requirements*.txt /montecarlo_simulation_finance/
+RUN  pip install -r requirements-test.txt
+
+COPY . /montecarlo_simulation_finance
+
+ENV PYTHONPATH "${PYTHONPATH}:/montecarlo_simulation_finance"
+
+ENTRYPOINT []
