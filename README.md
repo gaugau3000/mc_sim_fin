@@ -1,3 +1,5 @@
+# Work In Progress - Work In Progress - Work In Progress - Work In Progress - Work In Progress - Work In Progress
+
 # Montecarlo simulations for finance
 
 An inspiration of the book [BUILDING WINNING ALGORITHMIC TRADING SYSTEMS](https://www.amazon.com/Building-Winning-Algorithmic-Trading-Systems/dp/1118778987) of 'Kevin J. Davey' (chapter 7 detailed analysis)
