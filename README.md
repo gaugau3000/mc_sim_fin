@@ -24,7 +24,9 @@ You have 5000 dollar for trading, you stop trading if you capital go below 4000.
 
 ```python
 import pandas as pd
+import numpy as np
 from mc_sim_fin.mc import mc_analysis
+
 
 start_equity = 5000
 consider_ruin_equity = 4000
@@ -34,16 +36,17 @@ result_amounts = np.resize([200, -150], 365)
 
 df = pd.DataFrame({'result_dates': result_dates, 'result_amounts': result_amounts})
 
-mc_sims_results = mc_sims(df['result_dates'], df['result_amounts'], start_equity, consider_ruin_equity)
+mc_sims_results = mc_analysis(df['result_dates'], df['result_amounts'], start_equity, consider_ruin_equity)
+
 
 print(mc_sims_results)
 
 # print output
 {
-'risk_of_ruin_percent': 0.1565,
+'risk_of_ruin_percent': 0.156,
 'med_drawdown_percent': 0.36,
-'med_profit_percent': 1.9,
-'prob_profit_is_positive': 0.9981
+'med_profit_percent': 1.83,
+'prob_profit_is_positive': 0.9979
 }
 
 ```
