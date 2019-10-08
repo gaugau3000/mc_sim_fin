@@ -11,3 +11,5 @@ jobs:
       script:
         - pytest --cov=./ --flake8
         - codecov
+        - python setup.py sdist
+        - twine upload dist/mc-sim-fin-*.tar.gz -u gaugau3000 -p $PYPI_PASSWORD
