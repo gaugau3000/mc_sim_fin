@@ -9,6 +9,8 @@ install:
 jobs:
   include:
     - stage: "Tests"
-      script: pytest --cov=./ --flake8
-    - stage: "Coverall"
-      script: codecov
+      script:
+        - pytest --cov=./ --flake8
+    - stage: "Cover all"
+      script:
+        - codecov
