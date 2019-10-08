@@ -1,14 +1,13 @@
 # Work In Progress - Work In Progress - Work In Progress - Work In Progress - Work In Progress - Work In Progress
 
-# Montecarlo simulations for finance
+# Montecarlo simulations/analysis for finance (equity simulator)
 
 An inspiration of the book [BUILDING WINNING ALGORITHMIC TRADING SYSTEMS](https://www.amazon.com/Building-Winning-Algorithmic-Trading-Systems/dp/1118778987) of 'Kevin J. Davey' (chapter 7 detailed analysis)
 
-
-As an algorithmic trader I want to know what's my risk of ruin on 1 year of trading so that I can manage the risk.
-As an algorithmic trader I want to know the median drawdown on 1 year of trading so that I can expect as reference drawdown from my bot.
-As an algorithmic trader I want to know the median return on 1 year of trading so that I can expect as reference gain from my bot.
-As an algorithmic trader I want to know the probability that the bot make profit during the first year so that I can project and be patient :-).
+As an algorithmic trader I want to know what's my risk of ruin on 1 year of trading so that I can manage the risk.  
+As an algorithmic trader I want to know the median drawdown on 1 year of trading so that I can expect as reference drawdown from my bot.  
+As an algorithmic trader I want to know the median return on 1 year of trading so that I can expect as reference gain from my bot.  
+As an algorithmic trader I want to know the probability that the bot make profit during the first year so that I can be patient.  
 
 ## Installation
 
@@ -20,16 +19,20 @@ pip install mc-sim-fin
 
 ## Usage
 
-
+You have 5000 dollar for trading, you stop trading if you capital go below 4000. Your bot make one trade per day and alternate a win trade of 200 then a lose trade of 150 during one year.
 
 ```python
-from montecarlo_simulation_finance.montecarlo import mc_sims
+from mc_sim_fin.mc import mc_analysis
 
 start_equity = 5000
 consider_ruin_equity = 4000
 
-mc_sims_results = mc_sims(df['result_dates'], df['result_amounts'], start_equity, consider_ruin_equity)
+result_dates = pd.date_range(start='1/1/2017', end='31/12/2017').tolist()
+result_amounts = np.resize([200, -150], 365)
 
+df = pd.DataFrame({'result_dates': result_dates, 'result_amounts': result_amounts})
+
+mc_sims_results = mc_sims(df['result_dates'], df['result_amounts'], start_equity, consider_ruin_equity)
 
 print(mc_sims_results)
 
@@ -37,8 +40,8 @@ print(mc_sims_results)
 {
 'risk_of_ruin_percent': 0.1565,
 'med_drawdown_percent': 0.36,
-'med_return_percent': 1.9,
-'prob_returns_positive': 0.9981
+'med_profit_percent': 1.9,
+'prob_profit_is_positive': 0.9981
 }
 
 ```
@@ -46,7 +49,9 @@ print(mc_sims_results)
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please make sure to update tests as appropriate.
+Please cover your code by tests and run : pytest --flake8
+
+You can build your dev/tester image thanks to the Dockerfile.test
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

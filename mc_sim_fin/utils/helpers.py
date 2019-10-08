@@ -70,3 +70,11 @@ def is_sim_returns_positive(sim_result_amounts: Series) -> bool:
 def get_sims_return_positive_percent(sim_returns_positive: list) -> float:
     nb_sim_positive_returns = sim_returns_positive.count(True)
     return nb_sim_positive_returns/len(sim_returns_positive)
+
+
+def comp_nb_trades_for_sample(result_dates: Series, sim_years_duration: int) -> int:
+    nb_trades_result = get_nb_trades(result_dates)
+    nb_years_result = get_duration_in_years(result_dates)
+    avg_trades_per_year_result = get_avg_trades_per_year(nb_trades_result, nb_years_result)
+
+    return get_nb_trades_for_sample(avg_trades_per_year_result, sim_years_duration)
