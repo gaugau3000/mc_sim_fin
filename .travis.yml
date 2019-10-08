@@ -1,6 +1,5 @@
 env:
-  - PYTHONPATH=$PYTHONPATH:$(pwd)/mc_sim_fin
-  - CODECOV_TOKEN="148fc72c-8c86-468b-b5f4-e878fcc9ee93"
+  - PYTHONPATH=$PYTHONPATH:$(pwd)/mc_sim_fin CODECOV_TOKEN="148fc72c-8c86-468b-b5f4-e878fcc9ee93"
 language: python
 python:
   - "3.7"
