@@ -6,7 +6,7 @@ RUN mkdir mc_sim_fin
 WORKDIR /mc_sim_fin
 
 COPY requirements*.txt /mc_sim_fin/
-RUN  pip install -r requirements-test.txt
+RUN  pip install -r requirements-dev.txt
 
 COPY . /mc_sim_fin
 

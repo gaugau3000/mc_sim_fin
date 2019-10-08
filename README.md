@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/gaugau3000/mc_sim_fin.svg?branch=master)](https://travis-ci.com/gaugau3000/mc_sim_fin)
+
 # Work In Progress - Work In Progress - Work In Progress - Work In Progress - Work In Progress - Work In Progress
 
 # Montecarlo simulations/analysis for finance (equity simulator)
@@ -51,7 +53,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please cover your code by tests and run : pytest --flake8
 
-You can build your dev/tester image thanks to the Dockerfile.test
+You can build your dev image thanks to the Dockerfile.dev
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
