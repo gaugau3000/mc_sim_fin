@@ -19,7 +19,7 @@ pip install mc-sim-fin
 
 ## Usage
 
-You have 5000 dollar for trading, you stop trading if you capital go below 4000. Your bot make one trade per day and alternate a win trade of 200 then a lose trade of 150 during one year.
+You have 5000 dollar for trading, you stop trading if you capital go below 4000. Your bot make one trade per day and alternate a win trade of 200 then a lose trade of 150 during one year. What's happened if the trades came in an other order ?
 
 ```python
 from mc_sim_fin.mc import mc_analysis
