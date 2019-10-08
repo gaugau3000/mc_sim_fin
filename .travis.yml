@@ -7,5 +7,4 @@ python:
 install:
   - pip install -r requirements-dev.txt
 script:
-  - pytest --cov=./ --flake8
-  - codecov
+  - pytest --cov=./ --flake8 && codecov
