@@ -1,4 +1,6 @@
 -r requirements.txt
 pytest==4.5
 pytest-flake8==1.0.4
+pytest-cov==2.8.1
 twine==2.0.0
+codecov==2.0.15

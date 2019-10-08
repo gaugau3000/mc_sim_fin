@@ -11,5 +11,6 @@ RUN  pip install -r requirements-dev.txt
 COPY . /mc_sim_fin
 
 ENV PYTHONPATH "${PYTHONPATH}:/mc_sim_fin"
+ENV CODECOV_TOKEN ${CODECOV_TOKEN}
 
 ENTRYPOINT []
