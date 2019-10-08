@@ -8,9 +8,9 @@ install:
   - pip install -r requirements-dev.txt
 jobs:
   include:
-    - stage: "Tests"
+    - stage: test
       script:
         - pytest --cov=./ --flake8
-    - stage: "Cover all"
+    - stage: codecov
       script:
         - codecov
