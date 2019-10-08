@@ -1,3 +1,4 @@
+before_script: PYTHONPATH=$PYTHONPATH:$(pwd)
 language: python
 python:
   - "3.7"
