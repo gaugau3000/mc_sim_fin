@@ -1,6 +1,12 @@
+[![PyPI status](https://img.shields.io/pypi/status/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
 [![Build Status](https://travis-ci.org/gaugau3000/mc_sim_fin.svg?branch=master)](https://travis-ci.com/gaugau3000/mc_sim_fin)
 [![codecov](https://codecov.io/gh/gaugau3000/mc_sim_fin/branch/master/graph/badge.svg)](https://codecov.io/gh/gaugau3000/mc_sim_fin)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/37f78d31316241e4b97126c340975652)](https://www.codacy.com/manual/gaugau3000/mc_sim_fin?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gaugau3000/mc_sim_fin&amp;utm_campaign=Badge_Grade)
 [![PyPI](https://img.shields.io/pypi/v/mc-sim-fin)](https://pypi.org/project/mc-sim-fin/)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/gaugau3000/mc_sim_fin/graphs/commit-activity)
+[![PyPI license](https://img.shields.io/pypi/l/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
+
+
 
 # Montecarlo simulations/analysis for finance (equity simulator)
 
