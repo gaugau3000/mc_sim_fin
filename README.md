@@ -2,6 +2,7 @@
 [![Build Status](https://travis-ci.org/gaugau3000/mc_sim_fin.svg?branch=master)](https://travis-ci.com/gaugau3000/mc_sim_fin)
 [![codecov](https://codecov.io/gh/gaugau3000/mc_sim_fin/branch/master/graph/badge.svg)](https://codecov.io/gh/gaugau3000/mc_sim_fin)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/37f78d31316241e4b97126c340975652)](https://www.codacy.com/manual/gaugau3000/mc_sim_fin?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gaugau3000/mc_sim_fin&amp;utm_campaign=Badge_Grade)
+[![Maintainability](https://api.codeclimate.com/v1/badges/5aeaf6091ec31dd12b60/maintainability)](https://codeclimate.com/github/gaugau3000/mc_sim_fin/maintainability)
 [![PyPI](https://img.shields.io/pypi/v/mc-sim-fin)](https://pypi.org/project/mc-sim-fin/)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/gaugau3000/mc_sim_fin/graphs/commit-activity)
 [![PyPI license](https://img.shields.io/pypi/l/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
@@ -35,15 +36,12 @@ import numpy as np
 from mc_sim_fin.mc import mc_analysis
 
 
-start_equity = 5000
-consider_ruin_equity = 4000
-
 date_results = pd.date_range(start='1/1/2017', end='31/12/2017').tolist()
 profit_results = np.resize([200, -150], 365)
 
-results = pd.DataFrame({'date': date_results, 'profit': profit_results})
+results = pd.DataFrame({'date_results': date_results, 'profit_results': profit_results})
 
-mc_sims_results = mc_analysis(results, start_equity, consider_ruin_equity)
+mc_sims_results = mc_analysis(results, 5000, 4000)
 
 
 print(mc_sims_results)
