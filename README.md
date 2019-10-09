@@ -38,12 +38,12 @@ from mc_sim_fin.mc import mc_analysis
 start_equity = 5000
 consider_ruin_equity = 4000
 
-result_dates = pd.date_range(start='1/1/2017', end='31/12/2017').tolist()
-result_amounts = np.resize([200, -150], 365)
+date_results = pd.date_range(start='1/1/2017', end='31/12/2017').tolist()
+profit_results = np.resize([200, -150], 365)
 
-df = pd.DataFrame({'result_dates': result_dates, 'result_amounts': result_amounts})
+results = pd.DataFrame({'date': date_results, 'profit': profit_results})
 
-mc_sims_results = mc_analysis(df['result_dates'], df['result_amounts'], start_equity, consider_ruin_equity)
+mc_sims_results = mc_analysis(results, start_equity, consider_ruin_equity)
 
 
 print(mc_sims_results)

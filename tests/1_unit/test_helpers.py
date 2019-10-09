@@ -1,13 +1,13 @@
 import mc_sim_fin.utils.helpers as helpers
-from pandas import Series
+from pandas import Series, DataFrame
 from datetime import datetime
 import numpy as np
 import pytest
 
 
 def test_a_backtest_of_365_days_is_the_same_at_1_year():
-    result_dates = Series([datetime(2019, 1, 1), datetime(2020, 1, 1)])
-    assert helpers.get_duration_in_years(result_dates) == 1
+    date_results = Series([datetime(2019, 1, 1), datetime(2020, 1, 1)])
+    assert helpers.get_duration_in_years(date_results) == 1
 
 
 def test_a_backtest_with_two_elements_should_be_two_trades():
@@ -25,14 +25,14 @@ def test_when_my_bot_make_on_average_100_trade_per_year_and_i_want_to_simulate_3
 
 def test_backtest_result_when_simulated_should_be_shuffle():
     nb_trades_for_sample = 100
-    result_amounts = Series(np.linspace(-1000, 1000, 100))
-    result_sim1_amounts = helpers.get_randomized_trade_results(result_amounts, nb_trades_for_sample)
-    assert result_amounts.equals(result_sim1_amounts) is False
+    profit_results = Series(np.linspace(-1000, 1000, 100))
+    result_sim1_amounts = helpers.get_randomized_trade_results(profit_results, nb_trades_for_sample)
+    assert profit_results.equals(result_sim1_amounts) is False
 
 
 def test__4_trades_that_loose_two_times_100_dollar_sould_have_an_absolue_drowdown_of_200_dollar():
-    result_amounts = Series([-100, 100, -100, -100])
-    assert helpers.get_abs_max_drawdown(result_amounts) == 200
+    profit_results = Series([-100, 100, -100, -100])
+    assert helpers.get_abs_max_drawdown(profit_results) == 200
 
 
 def test_my_capital_is_4000_i_consider_ruin_at_3500_dollar_the_simulation_loss_700_dollar_so_i_am_ruin():
@@ -62,3 +62,31 @@ def test_i_make_simulation_and_the_result_is_1000_dollar_so_my_profit_is_positiv
 
 def test_i_make_4_simulations_3_gives_me_positive_results_so_i_have_75_percent_probability_to_be_positive():
     assert helpers.get_sim_return_positive_percent([True, False, True, True]) == 0.75
+
+
+def test_a_two_column_dataframe_with_date_in_first_column_and_float_in_second_should_return_tuple():
+    date_results = [datetime(2018, 1, 1), datetime(2018, 12, 31)]
+    profit_results = [-100.1, 100]
+    df = DataFrame({'date': date_results, 'profit': profit_results})
+
+    date_results_series, profit_results_series = helpers.extract_date_profit_columns(df)
+    assert date_results_series.iloc[0] == datetime(2018, 1, 1)
+    assert profit_results_series.iloc[0] == -100.1
+
+
+def test_a_two_column_dataframe_with_float_in_first_column_should_raise_error():
+    profit_results = [-100.1, 100]
+    date_results = [datetime(2018, 1, 1), datetime(2018, 12, 31)]
+    df = DataFrame({'profit': profit_results, 'date': date_results})
+
+    with pytest.raises(TypeError):
+        helpers.extract_date_profit_columns(df)
+
+
+def test_a_two_column_dataframe_with_date_in_second_column_should_raise_error():
+    date_results = [datetime(2018, 1, 1), datetime(2018, 12, 31)]
+    profit_results = [datetime(2018, 1, 1), datetime(2018, 12, 31)]
+    df = DataFrame({'date': date_results, 'profit': profit_results})
+
+    with pytest.raises(TypeError):
+        helpers.extract_date_profit_columns(df)

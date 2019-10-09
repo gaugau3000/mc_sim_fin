@@ -1,13 +1,15 @@
 from pandas import Series, DataFrame
 import numpy as np
+from typing import Tuple
+import pandas as pd
 
 
-def get_duration_in_years(result_dates: Series) -> float:
-    return (result_dates.max() - result_dates.min()).days/365
+def get_duration_in_years(date_results: Series) -> float:
+    return (date_results.max() - date_results.min()).days/365
 
 
-def get_nb_trades(result_dates: Series) -> int:
-    return result_dates.count()
+def get_nb_trades(date_results: Series) -> int:
+    return date_results.count()
 
 
 def get_avg_trades_per_year(nb_trades_result: int, nb_years_result: float) -> float:
@@ -19,29 +21,29 @@ def get_nb_trades_for_sample(avg_trades_per_year_result: float,
     return round(avg_trades_per_year_result * sim_years_duration)
 
 
-def get_randomized_trade_results(result_amounts: Series,
+def get_randomized_trade_results(profit_results: Series,
                                  nb_sim_trade: int) -> Series:
-    return result_amounts.sample(n=int(nb_sim_trade),
+    return profit_results.sample(n=int(nb_sim_trade),
                                  random_state=np.random.RandomState(),
                                  replace=True)
 
 
-def get_abs_max_drawdown(result_amounts: Series) -> float:
+def get_abs_max_drawdown(profit_results: Series) -> float:
     max_drawdown_df = DataFrame()
-    max_drawdown_df['cumulative'] = result_amounts.cumsum()
+    max_drawdown_df['cumulative'] = profit_results.cumsum()
     max_drawdown_df['high_value'] = max_drawdown_df['cumulative'].cummax()
     max_drawdown_df['drawdown'] = max_drawdown_df['cumulative'] - max_drawdown_df['high_value']
 
     return abs(max_drawdown_df['drawdown'].min())
 
 
-def get_profit(result_amounts: Series) -> float:
-    return result_amounts.sum()
+def get_profit(profit_results: Series) -> float:
+    return profit_results.sum()
 
 
-def is_iteration_ruin(result_amounts: list, start_capital_amount: float, capital_consider_ruin_amount: float) -> bool:
+def is_iteration_ruin(profit_results: list, start_capital_amount: float, capital_consider_ruin_amount: float) -> bool:
     max_loss_to_be_ruin = - (start_capital_amount - capital_consider_ruin_amount)
-    if Series(result_amounts).cumsum().min() < max_loss_to_be_ruin:
+    if Series(profit_results).cumsum().min() < max_loss_to_be_ruin:
         return True
     return False
 
@@ -61,8 +63,8 @@ def get_sim_median_return_percent(sim_returns_amount: list, start_capital_amount
     return np.median(sim_returns_amount)/start_capital_amount
 
 
-def is_iteration_returns_positive(sim_result_amounts: Series) -> bool:
-    if sim_result_amounts.sum() > 0:
+def is_iteration_returns_positive(sim_profit_results: Series) -> bool:
+    if sim_profit_results.sum() > 0:
         return True
     return False
 
@@ -72,9 +74,24 @@ def get_sim_return_positive_percent(sim_returns_positive: list) -> float:
     return nb_sim_positive_returns/len(sim_returns_positive)
 
 
-def comp_nb_trades_for_sample(result_dates: Series, sim_years_duration: int) -> int:
-    nb_trades_result = get_nb_trades(result_dates)
-    nb_years_result = get_duration_in_years(result_dates)
+def extract_date_profit_columns(results: DataFrame) -> Tuple[Series, Series]:
+
+    if pd.api.types.is_datetime64_any_dtype(results.iloc[:, 0].dtypes):
+        date_results = results.iloc[:, 0]
+    else:
+        raise TypeError('the first column of the dataframe that represents the date must be a date format')
+
+    if pd.api.types.is_numeric_dtype(results.iloc[:, 1]):
+        profit_results = results.iloc[:, 1]
+    else:
+        raise TypeError('the second column of the dataframe that represents the profit must be a float format')
+
+    return date_results, profit_results
+
+
+def comp_nb_trades_for_sample(date_results: Series, sim_years_duration: int) -> int:
+    nb_trades_result = get_nb_trades(date_results)
+    nb_years_result = get_duration_in_years(date_results)
     avg_trades_per_year_result = get_avg_trades_per_year(nb_trades_result, nb_years_result)
 
     return get_nb_trades_for_sample(avg_trades_per_year_result, sim_years_duration)
