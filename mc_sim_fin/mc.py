@@ -4,24 +4,29 @@ from typing import Dict, Tuple
 
 
 def mc_analysis(results, start_equity: float,
-                ruin_equity: float, sim_years_duration=1, nb_iterations=10000):
+                ruin_equity: float, **kwargs):
 
     date_results, profit_results = helpers.extract_date_profit_columns(results)
+    sim_years_duration, nb_iterations = helpers.extract_extra_params(kwargs)
 
     nb_trades_for_sample = helpers.comp_nb_trades_for_sample(date_results, sim_years_duration)
 
-    sim = run_simulation(nb_iterations, nb_trades_for_sample, profit_results, start_equity, ruin_equity)
+    iter_params = {'nb_trades_for_sample': nb_trades_for_sample,
+                   'profit_results': profit_results,
+                   'start_equity': start_equity,
+                   'ruin_equity': ruin_equity}
+
+    sim = run_simulation(iter_params, nb_iterations)
 
     return get_simulation_results(sim, start_equity)
 
 
-def run_simulation(nb_iterations: int, nb_trades_for_sample: int, profit_results: Series, start_equity: float,
-                   ruin_equity: float) -> Tuple:
+def run_simulation(iter_params: Tuple, nb_iterations: int) -> Tuple:
     sim_drawdown, sim_profit, sim_is_positive_profit, sim_is_ruin = [], [], [], []
 
     for i in range(0, nb_iterations):
-        randomized_trade_results = helpers.get_randomized_trade_results(profit_results, nb_trades_for_sample)
-        sim_is_ruin.append(helpers.is_iteration_ruin(randomized_trade_results, start_equity, ruin_equity))
+        randomized_trade_results = helpers.get_randomized_trade_results(iter_params['profit_results'], iter_params['nb_trades_for_sample'])
+        sim_is_ruin.append(helpers.is_iteration_ruin(randomized_trade_results, iter_params['start_equity'], iter_params['ruin_equity']))
         sim_drawdown.append(helpers.get_abs_max_drawdown(randomized_trade_results))
         sim_profit.append(helpers.get_profit(randomized_trade_results))
         sim_is_positive_profit.append(helpers.is_iteration_returns_positive(randomized_trade_results))
