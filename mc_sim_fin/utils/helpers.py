@@ -1,6 +1,6 @@
 from pandas import Series, DataFrame
 import numpy as np
-from typing import Tuple
+from typing import Tuple, Dict
 import pandas as pd
 
 
@@ -87,6 +87,20 @@ def extract_date_profit_columns(results: DataFrame) -> Tuple[Series, Series]:
         raise TypeError('the second column of the dataframe that represents the profit must be a float format')
 
     return date_results, profit_results
+
+
+def extract_extra_params(kwargs: Dict) -> Tuple[float, int]:
+
+    expected_args = ['sim_years_duration', 'nb_iterations']
+
+    for key in kwargs:
+        if key not in expected_args:
+            raise ValueError('the kwargs key {} is not expected only {} allowed'.format(key, expected_args))
+
+    sim_years_duration = kwargs.get('sim_years_duration', 1)
+    nb_iterations = kwargs.get('nb_iterations', 10000)
+
+    return sim_years_duration, nb_iterations
 
 
 def comp_nb_trades_for_sample(date_results: Series, sim_years_duration: int) -> int:

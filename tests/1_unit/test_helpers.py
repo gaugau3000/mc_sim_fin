@@ -90,3 +90,14 @@ def test_a_two_column_dataframe_with_date_in_second_column_should_raise_error():
 
     with pytest.raises(TypeError):
         helpers.extract_date_profit_columns(df)
+
+
+def test_provide_1_year_simulation_10000_simulations_should_return_variable_with_good_infos():
+    sim_years_duration, nb_iterations = helpers.extract_extra_params({'sim_years_duration': 1, 'nb_iterations': 10000})
+    assert sim_years_duration == 1
+    assert nb_iterations == 10000
+
+
+def test_provide_an_extra_param_key_with_spelling_error_that_doesnt_exist():
+    with pytest.raises(ValueError):
+        sim_years_duration, nb_iterations = helpers.extract_extra_params({'sim_years_durtion': 1, 'nb_iterations': 10000})

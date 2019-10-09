@@ -18,7 +18,7 @@ def test_start_equity_5000_ruin_equity_4000_1_year_test():
 
     df = pd.DataFrame({'date_results': date_results, 'profit_results': profit_results})
 
-    mc_sims_results = mc_analysis(df, 5000, 4000, 1, 10000)
+    mc_sims_results = mc_analysis(df, 5000, 4000)
 
     assert 0.13 < mc_sims_results['risk_of_ruin_percent'] < 0.18
     assert 0.33 < round(mc_sims_results['med_drawdown_percent'], 2) < 0.37
