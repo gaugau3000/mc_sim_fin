@@ -35,7 +35,7 @@ def test__4_trades_that_loose_two_times_100_dollar_sould_have_an_absolue_drowdow
 
 
 def test_my_capital_is_4000_i_consider_ruin_at_3500_dollar_the_simulation_loss_700_dollar_so_i_am_ruin():
-    assert helpers.is_sim_ruin([300, -1000], 4000, 3500) is True
+    assert helpers.is_iteration_ruin([300, -1000], 4000, 3500) is True
 
 
 def test_during_4_simulations_i_am_ruin_during_1_so_i_get_a_probability_of_25_pecent_to_get_ruin():
