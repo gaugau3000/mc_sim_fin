@@ -39,35 +39,35 @@ def get_profit(result_amounts: Series) -> float:
     return result_amounts.sum()
 
 
-def is_sim_ruin(result_amounts: list, start_capital_amount: float, capital_consider_ruin_amount: float) -> bool:
+def is_iteration_ruin(result_amounts: list, start_capital_amount: float, capital_consider_ruin_amount: float) -> bool:
     max_loss_to_be_ruin = - (start_capital_amount - capital_consider_ruin_amount)
     if Series(result_amounts).cumsum().min() < max_loss_to_be_ruin:
         return True
     return False
 
 
-def get_sims_ruin_probability_percent(sims_is_ruin: list) -> float:
+def get_sim_ruin_probability_percent(sims_is_ruin: list) -> float:
     nb_times_sim_ruin = sims_is_ruin.count(True)
     return nb_times_sim_ruin/len(sims_is_ruin)
 
 
-def get_sims_median_drawdown_percent(abs_sim_drawdowns_amount: list, start_capital_amount: float) -> float:
+def get_sim_median_drawdown_percent(abs_sim_drawdowns_amount: list, start_capital_amount: float) -> float:
     if min(abs_sim_drawdowns_amount) < 0:
         raise ValueError('drawdown_abs_amount must be positive')
     return np.median(abs_sim_drawdowns_amount)/start_capital_amount
 
 
-def get_sims_median_return_percent(sim_returns_amount: list, start_capital_amount: float) -> float:
+def get_sim_median_return_percent(sim_returns_amount: list, start_capital_amount: float) -> float:
     return np.median(sim_returns_amount)/start_capital_amount
 
 
-def is_sim_returns_positive(sim_result_amounts: Series) -> bool:
+def is_iteration_returns_positive(sim_result_amounts: Series) -> bool:
     if sim_result_amounts.sum() > 0:
         return True
     return False
 
 
-def get_sims_return_positive_percent(sim_returns_positive: list) -> float:
+def get_sim_return_positive_percent(sim_returns_positive: list) -> float:
     nb_sim_positive_returns = sim_returns_positive.count(True)
     return nb_sim_positive_returns/len(sim_returns_positive)
 
