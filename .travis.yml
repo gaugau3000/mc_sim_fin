@@ -11,9 +11,11 @@ jobs:
       script:
         - pytest --cov=./ --flake8 && codecov
     - stage: before_deploy_gh_pages
+      if: branch = master
       script:
         - mkdocs build --verbose --clean --strict
     - stage: deploy_gh_pages
+      if: branch = master
       provider: pages
       skip_cleanup: true
       github_token: $GITHUB_TOKEN
