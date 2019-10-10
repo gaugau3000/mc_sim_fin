@@ -59,13 +59,13 @@ print(mc_sims_results)
 
 ```
 
-Ok so seems like I have 15.6% changes to be ruin, I can expect 36% max drawdown and 183% profit and I have 99.79% change to win money the first year. 
+Ok so seems like I have 15.6% changes to be ruin, I can expect 36% max drawdown and 183% profit and I have 99.79% change to win money the first year.
 
 ## Documentation
 
 You need more information about how the simulation work? You would like to contribute ?
 
-Look at the [documentation]()
+Look at the [documentation](https://gaugau3000.github.io/mc_sim_fin/)
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
