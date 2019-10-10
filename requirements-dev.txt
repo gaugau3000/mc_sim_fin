@@ -4,3 +4,6 @@ pytest-flake8==1.0.4
 pytest-cov==2.8.1
 twine==2.0.0
 codecov==2.0.15
+mkdocs==1.0.4
+mkdocs-material==4.4.3
+pymdown-extensions==6.1
