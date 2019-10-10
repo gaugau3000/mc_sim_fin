@@ -9,7 +9,7 @@ jobs:
   include:
     - stage: test
       script:
-        - pytest --cov=./ --flake8 && codecov
+        - pytest --cov=./ --flake8 && codecov && mkdocs gh-deploy --clean
     - stage: deploy
       if: tag IS present
       script:
