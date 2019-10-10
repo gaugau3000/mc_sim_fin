@@ -7,21 +7,21 @@ python: 3.7
 
 install: pip install -r requirements-dev.txt
 
-script: pytest --cov=./ --flake8 && codecov
 
-before_deploy:
-  if: branch = master
-  script: mkdocs build --verbose --clean --strict
+jobs:
 
-deploy:
-    if: branch = master
-    provider: pages
-    skip_cleanup: true
-    github_token: $GITHUB_TOKEN
-    local_dir: site
-    on:
-        branch: master
-
-after_deploy:
-    if: tag IS present
-    script: python setup.py sdist && twine upload dist/mc-sim-fin-*.tar.gz -u gaugau3000 -p $PYPI_PASSWORD
+  include:
+    - stage: tests
+      script: pytest --cov=./ --flake8 && codecov
+    - stage: deploy_gh_pages
+        if: branch = master
+        script: mkdocs build --verbose --clean --strict
+        provider: pages
+        skip_cleanup: true
+        github_token: $GITHUB_TOKEN
+        local_dir: site
+        on:
+            branch: master
+    - stage: deploy_pypi
+        if: tag IS present
+        script: python setup.py sdist && twine upload dist/mc-sim-fin-*.tar.gz -u gaugau3000 -p $PYPI_PASSWORD
