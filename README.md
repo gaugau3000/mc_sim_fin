@@ -13,10 +13,11 @@
 
 An inspiration of the book [BUILDING WINNING ALGORITHMIC TRADING SYSTEMS](https://www.amazon.com/Building-Winning-Algorithmic-Trading-Systems/dp/1118778987) of 'Kevin J. Davey' (chapter 7 detailed analysis)
 
-As an algorithmic trader I want to know what's my risk of ruin on 1 year of trading so that I can manage the risk.  
-As an algorithmic trader I want to know the median drawdown on 1 year of trading so that I can expect as reference drawdown from my bot.  
-As an algorithmic trader I want to know the median return on 1 year of trading so that I can expect as reference gain from my bot.  
-As an algorithmic trader I want to know the probability that the bot make profit during the first year so that I can be patient.  
+What's happened if your trades happened in an other order and you iterate many times to extract statistics ? What are your chances to be ruin ? What's max drawdown you may met ?
+
+Pass the trade results to the library and it will help you to manage the risk.
+
+CAUTION : The simulator include assumption that your trades are independent one of the others (you use a durbin watson statistic from [statsmodels library](https://www.statsmodels.org/dev/generated/statsmodels.stats.stattools.durbin_watson.html) to see that)
 
 ## Installation
 
@@ -28,7 +29,9 @@ pip install mc-sim-fin
 
 ## Usage
 
-You have 5000 dollar for trading, you stop trading if you capital go below 4000. Your bot make one trade per day and alternate a win trade of 200 then a lose trade of 150 during one year. What's happened if the trades came in an other order ?
+For the code example below you have 5000 dollar for trading, you stop trading if you capital go below 4000. Your backtest results show that you bot make one trade per day and alternate a win trade of 200 then a lose trade of 150 during the 2017 year.
+
+By default it simulate 1 year of trading with 10000 iterations (look at the documentation to modify this params).
 
 ```python
 import pandas as pd
@@ -41,7 +44,7 @@ profit_results = np.resize([200, -150], 365)
 
 results = pd.DataFrame({'date_results': date_results, 'profit_results': profit_results})
 
-mc_sims_results = mc_analysis(results, 5000, 4000)
+mc_sims_results = mc_analysis(results, start_equity=5000, ruin_equity=4000)
 
 
 print(mc_sims_results)
@@ -49,19 +52,20 @@ print(mc_sims_results)
 # print output
 {
 'risk_of_ruin_percent': 0.156,
-'med_drawdown_percent': 0.36,
+'med_max_drawdown_percent': 0.36,
 'med_profit_percent': 1.83,
 'prob_profit_is_positive': 0.9979
 }
 
 ```
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+Ok so seems like I have 15.6% changes to be ruin, I can expect 36% max drawdown and 183% profit and I have 99.79% change to win money the first year. 
 
-Please cover your code by tests and run : pytest --flake8
+## Documentation
 
-You can build your dev image thanks to the Dockerfile.dev
+You need more information about how the simulation work? You would like to contribute ?
+
+Look at the [documentation]()
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

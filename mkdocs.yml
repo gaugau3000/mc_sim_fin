@@ -1,0 +1,27 @@
+site_name: montecarlo simulation for finance library
+nav:
+  - Getting started: getting_started.md
+  - API: api.md
+  - Developper Guide: developper_guide.md
+theme:
+  name: 'material'
+dev_addr: '0.0.0.0:8000'
+markdown_extensions:
+  - admonition
+  - codehilite
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
