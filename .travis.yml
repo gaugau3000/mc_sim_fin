@@ -1,13 +1,7 @@
-env:
-  - PYTHONPATH=$PYTHONPATH:$(pwd)/mc_sim_fin CODECOV_TOKEN=$CODECOV_TOKEN
-
+env: PYTHONPATH=$PYTHONPATH:$(pwd)/mc_sim_fin CODECOV_TOKEN=$CODECOV_TOKEN
 language: python
-
 python: 3.7
-
 install: pip install -r requirements-dev.txt
-
-
 jobs:
   include:
     - stage: tests
