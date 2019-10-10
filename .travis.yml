@@ -1,24 +1,27 @@
-env: PYTHONPATH=$PYTHONPATH:$(pwd)/mc_sim_fin CODECOV_TOKEN=$CODECOV_TOKEN
+env:
+  - PYTHONPATH=$PYTHONPATH:$(pwd)/mc_sim_fin CODECOV_TOKEN=$CODECOV_TOKEN
+
 language: python
-python:
-  - "3.7"
+
+python: 3.7
+
 install: pip install -r requirements-dev.txt
-jobs:
-  include:
-    - stage: tests
-      script: pytest --cov=./ --flake8 && codecov
 
-    - stage: deploy_gh_pages
-        if: branch = master
-        before_deploy: mkdocs build --verbose --clean --strict
-        deploy:
-          provider: pages
-          skip_cleanup: true
-          github_token: $GITHUB_TOKEN
-          local_dir: site
-          on:
-              branch: master
+script: pytest --cov=./ --flake8 && codecov
 
-    - stage: deploy_pypi
-        if: tag IS present
-        script: python setup.py sdist && twine upload dist/mc-sim-fin-*.tar.gz -u gaugau3000 -p $PYPI_PASSWORD
+before_deploy:
+  if: branch = master
+  script: mkdocs build --verbose --clean --strict
+
+deploy:
+    if: branch = master
+    provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    local_dir: site
+    on:
+        branch: master
+
+after_deploy:
+    if: tag IS present
+    script: python setup.py sdist && twine upload dist/mc-sim-fin-*.tar.gz -u gaugau3000 -p $PYPI_PASSWORD
