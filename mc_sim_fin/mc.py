@@ -1,5 +1,4 @@
 import mc_sim_fin.utils.helpers as helpers
-from pandas import Series
 from typing import Dict, Tuple
 
 
