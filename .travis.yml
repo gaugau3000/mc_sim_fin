@@ -9,8 +9,18 @@ jobs:
   include:
     - stage: test
       script:
-        - pytest --cov=./ --flake8 && codecov && mkdocs gh-deploy --clean
-    - stage: deploy
+        - pytest --cov=./ --flake8 && codecov
+    - stage: before_deploy_gh_pages
+      script:
+        - mkdocs build --verbose --clean --strict
+    - stage: deploy_gh_pages
+      provider: pages
+      skip_cleanup: true
+      github_token: $GITHUB_TOKEN
+      local_dir: site
+      on:
+          branch: master
+    - stage: deploy_pypi
       if: tag IS present
       script:
         - python setup.py sdist && twine upload dist/mc-sim-fin-*.tar.gz -u gaugau3000 -p $PYPI_PASSWORD
