@@ -100,4 +100,4 @@ def test_provide_1_year_simulation_10000_simulations_should_return_variable_with
 
 def test_provide_an_extra_param_key_with_spelling_error_that_doesnt_exist():
     with pytest.raises(ValueError):
-        sim_years_duration, nb_iterations = helpers.extract_extra_params({'sim_years_durtion': 1, 'nb_iterations': 10000})
+        helpers.extract_extra_params({'sim_years_durtion': 1, 'nb_iterations': 10000})

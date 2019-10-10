@@ -24,7 +24,7 @@ def mc_analysis(results: DataFrame, start_equity: float,
 def run_simulation(iter_params: Tuple, nb_iterations: int) -> Tuple:
     sim_drawdown, sim_profit, sim_is_positive_profit, sim_is_ruin = [], [], [], []
 
-    for i in range(0, nb_iterations):
+    for _ in range(0, nb_iterations):
         randomized_trade_results = helpers.get_randomized_trade_results(iter_params['profit_results'], iter_params['nb_trades_for_sample'])
         sim_is_ruin.append(helpers.is_iteration_ruin(randomized_trade_results, iter_params['start_equity'], iter_params['ruin_equity']))
         sim_drawdown.append(helpers.get_abs_max_drawdown(randomized_trade_results))
