@@ -1,8 +1,9 @@
 import mc_sim_fin.utils.helpers as helpers
 from typing import Dict, Tuple
+from pandas import DataFrame
 
 
-def mc_analysis(results, start_equity: float,
+def mc_analysis(results: DataFrame, start_equity: float,
                 ruin_equity: float, **kwargs):
 
     date_results, profit_results = helpers.extract_date_profit_columns(results)
@@ -36,11 +37,11 @@ def run_simulation(iter_params: Tuple, nb_iterations: int) -> Tuple:
 def get_simulation_results(sim, start_equity: float) -> Dict:
 
     risk_of_ruin_percent = helpers.get_sim_ruin_probability_percent(sim['is_ruin'])
-    med_drawdown_percent = helpers.get_sim_median_drawdown_percent(sim['drawdown'], start_equity)
+    med_max_drawdown_percent = helpers.get_sim_median_drawdown_percent(sim['drawdown'], start_equity)
     med_profit_percent = helpers.get_sim_median_return_percent(sim['profit'], start_equity)
     prob_profit_is_positive = helpers.get_sim_return_positive_percent(sim['is_profit_positive'])
 
     return {'risk_of_ruin_percent': risk_of_ruin_percent,
-            'med_drawdown_percent': med_drawdown_percent,
+            'med_max_drawdown_percent': med_max_drawdown_percent,
             'med_profit_percent': med_profit_percent,
             'prob_profit_is_positive': prob_profit_is_positive}
