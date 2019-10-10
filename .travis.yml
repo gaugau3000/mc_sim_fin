@@ -6,10 +6,11 @@ python:
 install:
   - pip install -r requirements-dev.txt
 jobs:
-  include:
-    - stage: test
-      script:
-        - pytest --cov=./ --flake8
-        - codecov
-        - python setup.py sdist
-        - twine upload dist/mc-sim-fin-*.tar.gz -u gaugau3000 -p $PYPI_PASSWORD
+include:
+  - stage: test
+    script:
+      - pytest --cov=./ --flake8 && codecov
+  - stage: deploy
+    if: tag IS present
+    script:
+      - python setup.py sdist && twine upload dist/mc-sim-fin-*.tar.gz -u gaugau3000 -p $PYPI_PASSWORD
