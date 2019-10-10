@@ -9,7 +9,7 @@ jobs:
       script: pytest --cov=./ --flake8 && codecov
     - stage: deployghpages
       if: branch = master
-      before_deploy: mkdocs build --verbose --clean --strict
+      script: mkdocs build --verbose --clean --strict
       deploy:
         provider: pages
         skip_cleanup: true
