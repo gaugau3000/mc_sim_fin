@@ -23,6 +23,7 @@
 	"postCreateCommand": "sudo pip install -r requirements.txt",
 
 	"extensions": [
-		"ms-python.python"
+		"ms-python.python",
+		"DavidAnson.vscode-markdownlint"
 	]
 }
