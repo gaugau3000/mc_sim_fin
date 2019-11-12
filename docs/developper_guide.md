@@ -5,6 +5,6 @@
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
-Please cover your code by tests and run : `pytest --cov=mc_sim_fin  --flake8`
+Please cover your code by tests and run : `pytest --cov=./ --flake8`
 
 You can build your dev image thanks to the Dockerfile.dev.
