@@ -11,7 +11,7 @@ ARG USER_GID=$USER_UID
 RUN mkdir mc_sim_fin
 WORKDIR /mc_sim_fin
 
-COPY requirements-dev.txt /mc_sim_fin/
+COPY requirements*.txt /mc_sim_fin/
 
 ENV PYTHONPATH "${PYTHONPATH}:/mc_sim_fin"
 
@@ -22,8 +22,8 @@ RUN apt-get update \
     # Verify git, process tools, lsb-release (common in install instructions for CLIs) installed
     && apt-get -y install git procps lsb-release \
     #
-    # Install pylint
-    && pip --disable-pip-version-check --no-cache-dir install -r requirements-dev.txt \
+    # Install requirements
+    && pip --disable-pip-version-check --no-cache-dir install -r requirements-dev.txt -r requirements.txt \
     #
     # Create a non-root user to use if preferred - see https://aka.ms/vscode-remote/containers/non-root-user.
     && groupadd --gid $USER_GID $USERNAME \
