@@ -1,3 +1,5 @@
+# Montecarlo simulations/analysis for finance (equity simulator)
+
 [![PyPI status](https://img.shields.io/pypi/status/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
 [![Build Status](https://travis-ci.org/gaugau3000/mc_sim_fin.svg?branch=master)](https://travis-ci.com/gaugau3000/mc_sim_fin)
 [![codecov](https://codecov.io/gh/gaugau3000/mc_sim_fin/branch/master/graph/badge.svg)](https://codecov.io/gh/gaugau3000/mc_sim_fin)
@@ -7,15 +9,13 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/gaugau3000/mc_sim_fin/graphs/commit-activity)
 [![PyPI license](https://img.shields.io/pypi/l/ansicolortags.svg)](https://pypi.python.org/pypi/ansicolortags/)
 
-# Montecarlo simulations/analysis for finance (equity simulator)
-
 An inspiration of the book [BUILDING WINNING ALGORITHMIC TRADING SYSTEMS](https://www.amazon.com/Building-Winning-Algorithmic-Trading-Systems/dp/1118778987) of 'Kevin J. Davey' (chapter 7 detailed analysis)
 
-What's happened if your trades happened in an other order and you iterate many times to extract statistics ? What are your chances to be ruin ? What's max drawdown you may met ?
+What's happened if your trades happened in an other order and you do that many times to produce statistics ? What are your chances to be ruin ? What's maximum drawdown you may met ?
 
-Pass the trade results to the library and it will help you to manage the risk.
+Giving the trade results to the library and it will help you to manage the risk.
 
-CAUTION : The simulator include assumption that your trades are independent one of the others (you use a durbin watson statistic from [statsmodels library](https://www.statsmodels.org/dev/generated/statsmodels.stats.stattools.durbin_watson.html) to see that)
+CAUTION : The simulator include assumption that your trades are independent one from the others : it may be the case if your bots make more than one trade at the same time on correlated markets (you can use a durbin watson statistic from [statsmodels library](https://www.statsmodels.org/dev/generated/statsmodels.stats.stattools.durbin_watson.html) to see that)
 
 ## Installation
 
@@ -57,7 +57,7 @@ print(mc_sims_results)
 
 ```
 
-Ok so seems like I have 15.6% changes to be ruin, I can expect 36% max drawdown and 183% profit and I have 99.79% change to win money the first year.
+So I have 15.6% changes to be ruin, I can expect 36% max drawdown and 183% profit and I have 99.79% change to win money during the first year.
 
 ## Documentation
 
@@ -66,4 +66,5 @@ You need more information about how the simulation work? You would like to contr
 Look at the [documentation](https://gaugau3000.github.io/mc_sim_fin/)
 
 ## License
+
 [MIT](https://choosealicense.com/licenses/mit/)
