@@ -17,7 +17,7 @@ setup(
     url='https://github.com/gaugau3000/montecarlo_simulation_finance',
     author='Gautier Pialat',
     author_email='g.pialat@gmail.com',
-    classifiers=[ 
+    classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Financial and Insurance Industry',
         'Topic :: Office/Business :: Financial',
