@@ -1,6 +1,6 @@
-## mc_sim_fin.mc.mc_analysis
+# mc_sim_fin.mc.mc_analysis
 
-### mc_sim_fin.mc.mc_analysis(results: DataFrame, start_equity: float,ruin_equity: float, **kwargs)
+## mc_sim_fin.mc.mc_analysis(results: DataFrame, start_equity: float,ruin_equity: float, **kwargs)
 
 | Type | name:Type | Informations |
 | ------:| -----------:|-----------:|

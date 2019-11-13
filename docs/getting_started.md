@@ -1,4 +1,6 @@
-# How to install ?
+# Getting started
+
+## How to install
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install montecarlo simulation finance.
 
@@ -6,7 +8,7 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install monteca
 pip install mc-sim-fin
 ```
 
-# How to use ?
+## How to use
 
 ```python
 
